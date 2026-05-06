@@ -19,8 +19,16 @@ function createCell(value) {
 }
 
 function toNumber(value) {
-  if (value === null || value === undefined || value === "") {
+  if (value === null || value === undefined) {
     return null;
+  }
+  if (typeof value === "string") {
+    const normalized = value.trim().replace(/,/g, "");
+    if (!normalized) {
+      return null;
+    }
+    const num = Number(normalized);
+    return Number.isNaN(num) ? null : num;
   }
   const num = Number(value);
   return Number.isNaN(num) ? null : num;

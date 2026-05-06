@@ -114,6 +114,12 @@ async function initMainPage() {
   const data = await loadNutritionData();
   state.all = data.main;
   state.filtered = [...state.all];
+  // Reset potentially restored mobile autofill values, so first screen always shows defaults.
+  document.getElementById("keyword").value = "";
+  document.getElementById("categoryFilter").value = "";
+  document.getElementById("cuisineFilter").value = "";
+  document.getElementById("minKcal").value = "";
+  document.getElementById("maxKcal").value = "";
   setupFilters(data.main);
   setupPagination();
   renderTable();

@@ -5,8 +5,27 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const densityKey = "nutrition_density_mode";
   const disclaimerKey = "nutrition_disclaimer_seen";
+  let revealTargets = [];
+  const forceVisualReady = (withReveal = false) => {
+    body.classList.add("page-ready");
+    if (withReveal && revealTargets.length) {
+      revealTargets.forEach((el) => el.classList.add("in"));
+    }
+  };
+  const resolveStorage = (type) => {
+    try {
+      return type === "session" ? window.sessionStorage : window.localStorage;
+    } catch {
+      return null;
+    }
+  };
+  const localStore = resolveStorage("local");
+  const sessionStore = resolveStorage("session");
 
   const safeGet = (storage, key, fallback = null) => {
+    if (!storage) {
+      return fallback;
+    }
     try {
       return storage.getItem(key) ?? fallback;
     } catch {
@@ -14,6 +33,9 @@
     }
   };
   const safeSet = (storage, key, value) => {
+    if (!storage) {
+      return;
+    }
     try {
       storage.setItem(key, value);
     } catch {
@@ -21,15 +43,17 @@
     }
   };
 
-  const savedDensity = safeGet(localStorage, densityKey, "comfortable");
+  const savedDensity = safeGet(localStore, densityKey, "comfortable");
   if (savedDensity === "compact") {
     body.classList.add("density-compact");
   }
 
   window.addEventListener("load", () => {
-    body.classList.add("page-ready");
+    forceVisualReady(true);
   });
-  requestAnimationFrame(() => body.classList.add("page-ready"));
+  requestAnimationFrame(() => forceVisualReady(false));
+  // Fallback: ensure content is visible on restrictive mobile browsers.
+  setTimeout(() => forceVisualReady(true), 1200);
 
   window.addEventListener(
     "scroll",
@@ -110,14 +134,14 @@
     densitySelect.addEventListener("change", () => {
       const mode = densitySelect.value;
       body.classList.toggle("density-compact", mode === "compact");
-      safeSet(localStorage, densityKey, mode);
+      safeSet(localStore, densityKey, mode);
     });
   }
 
   const disclaimerModal = document.getElementById("disclaimerModal");
   const closeDisclaimerBtn = document.getElementById("closeDisclaimerBtn");
   if (disclaimerModal && closeDisclaimerBtn) {
-    const alreadySeen = safeGet(sessionStorage, disclaimerKey, "0") === "1";
+    const alreadySeen = safeGet(sessionStore, disclaimerKey, "0") === "1";
     if (!alreadySeen) {
       disclaimerModal.classList.add("show");
       disclaimerModal.setAttribute("aria-hidden", "false");
@@ -125,7 +149,7 @@
     const closeModal = () => {
       disclaimerModal.classList.remove("show");
       disclaimerModal.setAttribute("aria-hidden", "true");
-      safeSet(sessionStorage, disclaimerKey, "1");
+      safeSet(sessionStore, disclaimerKey, "1");
     };
     closeDisclaimerBtn.addEventListener("click", closeModal);
     disclaimerModal.addEventListener("click", (event) => {
@@ -154,7 +178,7 @@
     "color:#4f6696;font-size:12px;"
   );
 
-  const revealTargets = document.querySelectorAll(".panel, .index-card, .kpi, .site-footer");
+  revealTargets = Array.from(document.querySelectorAll(".panel, .index-card, .kpi, .site-footer"));
   if (!prefersReducedMotion && "IntersectionObserver" in window && revealTargets.length) {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -174,4 +198,6 @@
   } else {
     revealTargets.forEach((el) => el.classList.add("in"));
   }
+  // Secondary fallback in case observer callbacks are delayed or blocked.
+  setTimeout(() => forceVisualReady(true), 1800);
 })();
