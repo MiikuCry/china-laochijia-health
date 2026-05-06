@@ -13,7 +13,7 @@
 
 *Made by MiikuCry* 「互联网答辩生产能手」🔥
 
-[进入引导页](dist/index.html) | [主系统](dist/pages/home.html) | [作者主页](https://github.com/MiikuCry)
+[进入引导页](index.html) | [主系统](dist/pages/home.html) | [作者主页](https://github.com/MiikuCry)
 
 </div>
 
@@ -59,7 +59,7 @@
 cd 中国饮食参考
 
 # 直接打开引导页
-dist/index.html
+index.html
 ```
 
 ### 数据更新（Excel 改动后）
@@ -73,6 +73,7 @@ python tools/generate_data.py
 
 ```text
 中国饮食参考/
+├── index.html                 # 根入口（自动跳转到 dist）
 ├── dist/                      # 可直接交付的静态站点
 │   ├── index.html             # 引导页
 │   ├── pages/                 # 功能页面
