@@ -13,7 +13,7 @@
 
 *Made by MiikuCry* 「互联网答辩生产能手」🔥
 
-[进入引导页](index.html) | [主系统](dist/pages/home.html) | [作者主页](https://github.com/MiikuCry)
+[在线引导页](https://miikucry.github.io/china-laochijia-health/) | [在线主系统](https://miikucry.github.io/china-laochijia-health/pages/home.html) | [作者主页](https://github.com/MiikuCry)
 
 </div>
 
