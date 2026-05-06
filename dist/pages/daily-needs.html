@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="MiikuCry" />
+    <meta name="copyright" content="Copyright (c) 2026 MiikuCry" />
+    <title>中国胃老吃家饮食健康站 - 每日营养需求</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body class="page-daily">
+    <div class="id-watermark" aria-hidden="true">MiikuCry</div>
+    <div class="container">
+      <header class="site-header">
+        <h1>中国胃老吃家饮食健康站</h1>
+        <p>每日营养需求：结合体重、活动量和目标，估算日常能量与三大营养素建议范围。</p>
+        <a class="guide-back-btn" href="../index.html">← 返回引导页</a>
+        <nav class="nav nav-primary">
+          <a href="./home.html">食物主表</a>
+          <a href="./references.html">常见食材一览</a>
+          <a class="active" href="./daily-needs.html">每日营养需求</a>
+          <a href="./exercise-burn.html">运动能量消耗</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="controls">
+          <div>
+            <label for="gender">性别参考</label>
+            <select id="gender">
+              <option value="male">男性</option>
+              <option value="female">女性</option>
+            </select>
+          </div>
+          <div>
+            <label for="weight">当前体重(kg)</label>
+            <input id="weight" type="number" min="40" max="150" value="60" />
+          </div>
+          <div>
+            <label for="activityLevel">活动水平</label>
+            <select id="activityLevel">
+              <option value="0">久卧/卧床</option>
+              <option value="1" selected>久坐/轻度</option>
+              <option value="2">少量运动</option>
+              <option value="3">中等运动</option>
+              <option value="4">大量运动/体力劳动</option>
+            </select>
+          </div>
+          <div>
+            <label for="targetMode">目标模式</label>
+            <select id="targetMode">
+              <option value="maintain" selected>维持体重</option>
+              <option value="cut">减脂（约-10%）</option>
+              <option value="bulk">增肌（约+10%）</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="label">参考体重档位</div>
+            <div class="value" id="kpiWeight">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">BMI参考</div>
+            <div class="value" id="kpiBmi">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">基础估算需求</div>
+            <div class="value" id="kpiBase">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">目标热量建议</div>
+            <div class="value" id="kpiTarget">—</div>
+          </div>
+        </div>
+        <p class="hint" id="macroHint">—</p>
+      </section>
+
+      <section class="panel">
+        <h2>活动系数说明</h2>
+        <div id="activityCards" class="record-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>三大营养素建议</h2>
+        <div id="macroCards" class="record-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>关键微量营养素检索</h2>
+        <div class="controls">
+          <div>
+            <label for="microKeyword">按营养素/来源/缺乏表现搜索</label>
+            <input id="microKeyword" placeholder="例如：钙、贫血、牛奶、Omega-3" />
+          </div>
+        </div>
+        <div id="microCards" class="record-list"></div>
+      </section>
+
+      <div id="dailyError" class="stats"></div>
+
+      <footer class="site-footer">
+        <span>中国胃老吃家饮食健康站 · 每日营养需求</span>
+        <span><a href="./home.html">返回食物主表</a></span>
+      </footer>
+    </div>
+
+    <script src="../assets/data/nutrition-data.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/ui-effects.js"></script>
+    <script src="../assets/js/daily-needs.js"></script>
+  </body>
+</html>

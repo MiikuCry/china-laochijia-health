@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="MiikuCry" />
+    <meta name="copyright" content="Copyright (c) 2026 MiikuCry" />
+    <title>中国胃老吃家饮食健康站 - 主表查询</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body class="page-home">
+    <div class="id-watermark" aria-hidden="true">MiikuCry</div>
+    <div id="disclaimerModal" class="modal-overlay" aria-hidden="true">
+      <div class="modal-card">
+        <h3>内容声明</h3>
+        <p>
+          本站内容参考部分来自《中国食物成分表（第6版）》及营养学研究资料，部分信息来源于网络，数据不保证完全正确，仅供参考。
+        </p>
+        <p>
+          如发现内容有误，欢迎在
+          <a href="https://github.com/MiikuCry" target="_blank" rel="noreferrer">GitHub</a>
+          评论指正。
+        </p>
+        <div class="modal-actions">
+          <button id="closeDisclaimerBtn" type="button">我已了解</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <header class="site-header">
+        <h1>中国胃老吃家饮食健康站</h1>
+        <p>让人真正能用起来的食物辞典：查食物、看营养、做日常饮食与运动决策。</p>
+        <a class="guide-back-btn" href="../index.html">← 返回引导页</a>
+        <nav class="nav nav-primary">
+          <a class="active" href="./home.html">食物主表</a>
+          <a href="./references.html">常见食材一览</a>
+          <a href="./daily-needs.html">每日营养需求</a>
+          <a href="./exercise-burn.html">运动能量消耗</a>
+        </nav>
+        <nav class="nav nav-secondary">
+          <a class="active" href="./home.html">总览</a>
+          <a href="./dishes.html">菜名索引</a>
+          <a href="./categories.html">分类索引</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="hero-grid">
+          <div class="hero-item">
+            <b>核心库</b>
+            以常见食物营养数据为核心，统一检索、筛选和对照体验。
+          </div>
+          <div class="hero-item">
+            <b>查找方式</b>
+            关键词、菜名索引、分类索引三种方式互补，减少查找成本。
+          </div>
+          <div class="hero-item">
+            <b>决策辅助</b>
+            “每日需求”和“运动消耗”功能页，支持饮食和活动联动参考。
+          </div>
+        </div>
+      </section>
+
+      <h2>食物主表查询</h2>
+      <p class="hint">支持筛选、分页、营养信息对照，适合日常快速判断餐食热量与营养结构。</p>
+
+      <section class="panel">
+        <div class="controls">
+          <div>
+            <label for="keyword">菜名/原料关键词</label>
+            <input id="keyword" placeholder="例如：鱼、牛肉、米饭" />
+          </div>
+          <div>
+            <label for="categoryFilter">分类</label>
+            <select id="categoryFilter">
+              <option value="">全部分类</option>
+            </select>
+          </div>
+          <div>
+            <label for="cuisineFilter">菜系</label>
+            <select id="cuisineFilter">
+              <option value="">全部菜系</option>
+            </select>
+          </div>
+          <div>
+            <label for="minKcal">最小热量(kcal/100g)</label>
+            <input id="minKcal" type="number" min="0" />
+          </div>
+          <div>
+            <label for="maxKcal">最大热量(kcal/100g)</label>
+            <input id="maxKcal" type="number" min="0" />
+          </div>
+        </div>
+        <div id="stats" class="stats"></div>
+      </section>
+
+      <section class="panel">
+        <div id="mainCards" class="record-list"></div>
+        <div class="pagination">
+          <button id="prevPage">上一页</button>
+          <button id="nextPage">下一页</button>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <span>中国胃老吃家饮食健康站 · 静态成品站点</span>
+        <span>数据来源：`data-source/中国常见食品营养参考_v3.xlsx`</span>
+      </footer>
+    </div>
+
+    <script src="../assets/data/nutrition-data.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/ui-effects.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

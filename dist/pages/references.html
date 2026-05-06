@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="MiikuCry" />
+    <meta name="copyright" content="Copyright (c) 2026 MiikuCry" />
+    <title>中国胃老吃家饮食健康站 - 常见食材一览</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body class="page-ref">
+    <div class="id-watermark" aria-hidden="true">MiikuCry</div>
+    <div class="container">
+      <header class="site-header">
+        <h1>中国胃老吃家饮食健康站</h1>
+        <p>常见食材一览：用于补充食材营养、分类说明和菜肴对照参考。</p>
+        <a class="guide-back-btn" href="../index.html">← 返回引导页</a>
+        <nav class="nav nav-primary">
+          <a href="./home.html">食物主表</a>
+          <a class="active" href="./references.html">常见食材一览</a>
+          <a href="./daily-needs.html">每日营养需求</a>
+          <a href="./exercise-burn.html">运动能量消耗</a>
+        </nav>
+      </header>
+
+      <h2>常见食材一览</h2>
+      <p class="hint">这里汇总食材营养、分类说明、使用说明与菜肴对照信息，便于辅助主页面查阅。</p>
+
+      <section class="panel">
+        <div class="controls">
+          <div>
+            <label for="refKeyword">关键词筛选（名称/分类/营养/备注）</label>
+            <input id="refKeyword" placeholder="例如：牛肉、维生素、低热量、猪肉" />
+          </div>
+        </div>
+        <div id="refStats" class="stats"></div>
+      </section>
+
+      <div id="referenceRoot"></div>
+
+      <footer class="site-footer">
+        <span>中国胃老吃家饮食健康站 · 常见食材一览</span>
+        <span><a href="./home.html">返回食物主表</a></span>
+      </footer>
+    </div>
+
+    <script src="../assets/data/nutrition-data.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/ui-effects.js"></script>
+    <script src="../assets/js/references.js"></script>
+  </body>
+</html>

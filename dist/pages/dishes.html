@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="MiikuCry" />
+    <meta name="copyright" content="Copyright (c) 2026 MiikuCry" />
+    <title>中国胃老吃家饮食健康站 - 菜名索引</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body class="page-dishes">
+    <div class="id-watermark" aria-hidden="true">MiikuCry</div>
+    <div class="container">
+      <header class="site-header">
+        <h1>中国胃老吃家饮食健康站</h1>
+        <p>菜名索引：通过名称快速定位到主表菜品。</p>
+        <a class="guide-back-btn" href="../index.html">← 返回引导页</a>
+        <nav class="nav nav-primary">
+          <a class="active" href="./home.html">食物主表</a>
+          <a href="./references.html">常见食材一览</a>
+          <a href="./daily-needs.html">每日营养需求</a>
+          <a href="./exercise-burn.html">运动能量消耗</a>
+        </nav>
+        <nav class="nav nav-secondary">
+          <a href="./home.html">总览</a>
+          <a class="active" href="./dishes.html">菜名索引</a>
+          <a href="./categories.html">分类索引</a>
+        </nav>
+      </header>
+
+      <h2>菜名索引</h2>
+      <p class="hint">按菜名首字分组，适合快速确认某道菜是否已收录以及大致热量水平。</p>
+
+      <section class="panel">
+        <div class="controls">
+          <div>
+            <label for="dishKeyword">搜索菜名</label>
+            <input id="dishKeyword" placeholder="输入菜名关键词" />
+          </div>
+        </div>
+        <div id="dishStats" class="stats"></div>
+      </section>
+
+      <section class="index-grid" id="dishIndex"></section>
+
+      <footer class="site-footer">
+        <span>中国胃老吃家饮食健康站 · 菜名索引</span>
+        <span><a href="./home.html">返回食物主表</a></span>
+      </footer>
+    </div>
+
+    <script src="../assets/data/nutrition-data.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/ui-effects.js"></script>
+    <script src="../assets/js/dishes.js"></script>
+  </body>
+</html>

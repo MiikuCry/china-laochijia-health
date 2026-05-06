@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="MiikuCry" />
+    <meta name="copyright" content="Copyright (c) 2026 MiikuCry" />
+    <title>中国胃老吃家饮食健康站 - 运动能量消耗</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body class="page-exercise">
+    <div class="id-watermark" aria-hidden="true">MiikuCry</div>
+    <div class="container">
+      <header class="site-header">
+        <h1>中国胃老吃家饮食健康站</h1>
+        <p>运动能量消耗：按体重、时长和运动类型估算消耗，帮助你做饮食与训练平衡。</p>
+        <a class="guide-back-btn" href="../index.html">← 返回引导页</a>
+        <nav class="nav nav-primary">
+          <a href="./home.html">食物主表</a>
+          <a href="./references.html">常见食材一览</a>
+          <a href="./daily-needs.html">每日营养需求</a>
+          <a class="active" href="./exercise-burn.html">运动能量消耗</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="controls">
+          <div>
+            <label for="exerciseKeyword">运动名称关键词</label>
+            <input id="exerciseKeyword" placeholder="例如：慢跑、游泳、跳绳" />
+          </div>
+          <div>
+            <label for="exerciseType">运动分类</label>
+            <select id="exerciseType">
+              <option value="">全部分类</option>
+            </select>
+          </div>
+          <div>
+            <label for="intensityLevel">强度等级</label>
+            <select id="intensityLevel">
+              <option value="">全部强度</option>
+            </select>
+          </div>
+          <div>
+            <label for="bodyWeight">体重(kg)</label>
+            <input id="bodyWeight" type="number" min="35" max="150" value="60" />
+          </div>
+          <div>
+            <label for="duration">时长(分钟)</label>
+            <input id="duration" type="number" min="5" max="240" value="30" />
+          </div>
+          <div>
+            <label for="sortMode">排序方式</label>
+            <select id="sortMode">
+              <option value="burn" selected>按估算消耗降序</option>
+              <option value="name">按名称排序</option>
+            </select>
+          </div>
+        </div>
+        <div id="exerciseStats" class="stats"></div>
+      </section>
+
+      <section class="panel">
+        <h2>当前条件下推荐前三</h2>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="label">Top 1</div>
+            <div class="value" id="top1">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Top 2</div>
+            <div class="value" id="top2">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Top 3</div>
+            <div class="value" id="top3">—</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div id="exerciseCards" class="record-list"></div>
+      </section>
+
+      <div id="exerciseError" class="stats"></div>
+
+      <footer class="site-footer">
+        <span>中国胃老吃家饮食健康站 · 运动能量消耗</span>
+        <span><a href="./home.html">返回食物主表</a></span>
+      </footer>
+    </div>
+
+    <script src="../assets/data/nutrition-data.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/ui-effects.js"></script>
+    <script src="../assets/js/exercise-burn.js"></script>
+  </body>
+</html>
