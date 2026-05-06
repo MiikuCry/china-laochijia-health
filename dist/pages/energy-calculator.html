@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="MiikuCry" />
+    <meta name="copyright" content="Copyright (c) 2026 MiikuCry" />
+    <title>中国胃老吃家饮食健康站 - 能量计算器</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body class="page-energy">
+    <div class="id-watermark" aria-hidden="true">MiikuCry</div>
+    <div class="container">
+      <header class="site-header">
+        <h1>中国胃老吃家饮食健康站</h1>
+        <p>能量计算器：整合 BMI、日常消耗、饮食摄入和运动支出，做一日热量进出账。</p>
+        <a class="guide-back-btn" href="../index.html">← 返回引导页</a>
+        <nav class="nav nav-primary">
+          <a href="./home.html">食物主表</a>
+          <a href="./references.html">常见食材一览</a>
+          <a href="./daily-needs.html">每日营养需求</a>
+          <a href="./exercise-burn.html">运动能量消耗</a>
+          <a class="active" href="./energy-calculator.html">能量计算器</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <h2>基础参数</h2>
+        <div class="controls">
+          <div>
+            <label for="calcGender">性别参考</label>
+            <select id="calcGender">
+              <option value="male">男性</option>
+              <option value="female">女性</option>
+            </select>
+          </div>
+          <div>
+            <label for="calcHeight">身高(cm)</label>
+            <input id="calcHeight" type="number" min="130" max="220" value="170" />
+          </div>
+          <div>
+            <label for="calcWeight">体重(kg)</label>
+            <input id="calcWeight" type="number" min="35" max="180" value="60" />
+          </div>
+          <div>
+            <label for="calcActivityLevel">当日基础生活模式</label>
+            <select id="calcActivityLevel">
+              <option value="0">久卧/卧床</option>
+              <option value="1" selected>久坐/轻度</option>
+              <option value="2">少量运动</option>
+              <option value="3">中等运动</option>
+              <option value="4">大量运动/体力劳动</option>
+            </select>
+          </div>
+        </div>
+        <p class="hint">
+          提示：如果你已选择高活动模式，请不要把同类基础活动重复计入运动项（例如已经按高活动估算，就不再额外加“走了10000步”，除非当天显著超量如 20000 步）。
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>基础消耗估算</h2>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="label">BMI</div>
+            <div class="value" id="calcBmi">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">BMI区间</div>
+            <div class="value" id="calcBmiLabel">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">活动档位匹配</div>
+            <div class="value" id="calcWeightMatch">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">基础生活消耗</div>
+            <div class="value" id="calcBaseBurn">—</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>当日餐食配置（摄入）</h2>
+        <div class="controls">
+          <div>
+            <label for="foodSearch">菜品搜索</label>
+            <input id="foodSearch" placeholder="输入菜名关键词快速匹配" />
+          </div>
+          <div>
+            <label for="foodCategory">食物主表分类筛选</label>
+            <select id="foodCategory">
+              <option value="">全部分类</option>
+            </select>
+          </div>
+          <div>
+            <label for="foodSelect">从食物主表/菜肴标杆中选择</label>
+            <select id="foodSelect"></select>
+          </div>
+          <div>
+            <label for="mealType">归属餐次</label>
+            <select id="mealType">
+              <option value="breakfast">早餐</option>
+              <option value="lunch" selected>午餐</option>
+              <option value="dinner">晚餐</option>
+              <option value="snack">加餐</option>
+            </select>
+          </div>
+          <div>
+            <label for="foodGrams">克数（默认参考克数）</label>
+            <input id="foodGrams" type="number" min="1" value="100" />
+          </div>
+        </div>
+        <div class="calc-actions" style="margin-top: 10px;">
+          <button id="addFoodBtn" type="button">加入一餐</button>
+        </div>
+        <div class="kpi-grid calc-meal-kpis">
+          <div class="kpi">
+            <div class="label">早餐摄入</div>
+            <div class="value" id="mealBreakfastTotal">0 kcal</div>
+          </div>
+          <div class="kpi">
+            <div class="label">午餐摄入</div>
+            <div class="value" id="mealLunchTotal">0 kcal</div>
+          </div>
+          <div class="kpi">
+            <div class="label">晚餐摄入</div>
+            <div class="value" id="mealDinnerTotal">0 kcal</div>
+          </div>
+          <div class="kpi">
+            <div class="label">加餐摄入</div>
+            <div class="value" id="mealSnackTotal">0 kcal</div>
+          </div>
+        </div>
+        <div class="calc-entry-total">当前餐食摄入合计：<span id="mealTotal">0 kcal</span></div>
+        <div id="mealEntryList" class="calc-entry-list" style="margin-top: 8px;"></div>
+      </section>
+
+      <section class="panel">
+        <h2>当日运动记录（支出）</h2>
+        <div class="controls">
+          <div>
+            <label for="exerciseSearch">运动搜索</label>
+            <input id="exerciseSearch" placeholder="输入运动名关键词快速匹配" />
+          </div>
+          <div>
+            <label for="exerciseSelect">从运动能量消耗表中选择</label>
+            <select id="exerciseSelect"></select>
+          </div>
+          <div>
+            <label for="exerciseMinutes">分钟数</label>
+            <input id="exerciseMinutes" type="number" min="1" value="30" />
+          </div>
+        </div>
+        <div class="calc-actions" style="margin-top: 10px;">
+          <button id="addExerciseBtn" type="button">加入今日运动</button>
+        </div>
+        <div class="calc-entry-total">当前运动额外消耗：<span id="exerciseTotal">0 kcal</span></div>
+        <div id="exerciseEntryList" class="calc-entry-list" style="margin-top: 8px;"></div>
+      </section>
+
+      <section class="panel">
+        <h2>当日热量进出账</h2>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="label">当日摄入</div>
+            <div class="value" id="calcIntake">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">运动额外消耗</div>
+            <div class="value" id="calcExerciseBurn">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">当日总消耗</div>
+            <div class="value" id="calcTotalOut">—</div>
+          </div>
+          <div class="kpi">
+            <div class="label">净收支（摄入-消耗）</div>
+            <div class="value" id="calcNet">—</div>
+          </div>
+        </div>
+        <div class="calc-actions" style="margin-top: 10px;">
+          <button id="clearCacheBtn" type="button">删除本页缓存</button>
+        </div>
+      </section>
+
+      <div id="energyError" class="stats"></div>
+
+      <footer class="site-footer">
+        <span>中国胃老吃家饮食健康站 · 能量计算器</span>
+        <span><a href="./home.html">返回食物主表</a></span>
+      </footer>
+    </div>
+
+    <script src="../assets/data/nutrition-data.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/ui-effects.js"></script>
+    <script src="../assets/js/energy-calculator.js"></script>
+  </body>
+</html>

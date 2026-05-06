@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="MiikuCry" />
     <meta name="copyright" content="Copyright (c) 2026 MiikuCry" />
-    <title>中国胃老吃家饮食健康站 - 分类索引</title>
+    <title>中国胃老吃家饮食健康站 - 菜肴标杆对照</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
-  <body class="page-categories">
+  <body class="page-benchmark">
     <div class="id-watermark" aria-hidden="true">MiikuCry</div>
     <div class="container">
       <header class="site-header">
         <h1>中国胃老吃家饮食健康站</h1>
-        <p>分类索引：从菜系、食物类别和原料视角理解整个食物库。</p>
+        <p>菜肴标杆对照：来自表5，用于快速比较菜品烹饪方式与热量梯度。</p>
         <a class="guide-back-btn" href="../index.html">← 返回引导页</a>
         <nav class="nav nav-primary">
           <a class="active" href="./home.html">食物主表</a>
@@ -25,32 +25,42 @@
         <nav class="nav nav-secondary">
           <a href="./home.html">总览</a>
           <a href="./dishes.html">菜名索引</a>
-          <a class="active" href="./categories.html">分类索引</a>
-          <a href="./benchmark.html">菜肴标杆对照</a>
+          <a href="./categories.html">分类索引</a>
+          <a class="active" href="./benchmark.html">菜肴标杆对照</a>
         </nav>
       </header>
 
-      <h2>多维分类索引</h2>
-      <p class="hint">同一主表数据按“分类 / 菜系 / 主要原料”三种视角索引，便于横向比较和做搭配。</p>
-      <div id="categoryStats" class="stats"></div>
+      <h2>菜肴标杆对照</h2>
+      <p class="hint">按肉类/食材、烹饪方式与减脂指数筛选，快速找到更适合控热量的做法。</p>
 
       <section class="panel">
-        <h2>按分类索引</h2>
-        <div id="byCategory" class="index-grid"></div>
+        <div class="controls">
+          <div>
+            <label for="benchmarkKeyword">关键词搜索</label>
+            <input id="benchmarkKeyword" placeholder="例如：鸡胸、清蒸、红烧、减脂" />
+          </div>
+          <div>
+            <label for="benchmarkIngredient">肉类/食材</label>
+            <select id="benchmarkIngredient">
+              <option value="">全部食材</option>
+            </select>
+          </div>
+          <div>
+            <label for="benchmarkMethod">烹饪方式</label>
+            <select id="benchmarkMethod">
+              <option value="">全部方式</option>
+            </select>
+          </div>
+        </div>
+        <div id="benchmarkStats" class="stats"></div>
       </section>
 
       <section class="panel">
-        <h2>按菜系索引</h2>
-        <div id="byCuisine" class="index-grid"></div>
-      </section>
-
-      <section class="panel">
-        <h2>按主要原料索引</h2>
-        <div id="byMaterial" class="index-grid"></div>
+        <div id="benchmarkCards" class="record-list"></div>
       </section>
 
       <footer class="site-footer">
-        <span>中国胃老吃家饮食健康站 · 分类索引</span>
+        <span>中国胃老吃家饮食健康站 · 菜肴标杆对照</span>
         <span><a href="./home.html">返回食物主表</a></span>
       </footer>
     </div>
@@ -58,6 +68,6 @@
     <script src="../assets/data/nutrition-data.js"></script>
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/ui-effects.js"></script>
-    <script src="../assets/js/categories.js"></script>
+    <script src="../assets/js/benchmark.js"></script>
   </body>
 </html>

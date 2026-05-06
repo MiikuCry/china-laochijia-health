@@ -69,18 +69,24 @@ function pickNearestWeightRow(list, weight) {
   return [...list].sort((a, b) => Math.abs(a.weight - weight) - Math.abs(b.weight - weight))[0];
 }
 
-function renderActivityCards(rows) {
+function renderActivityCards(rows, caloriesByActivity = [], activeIdx = 1) {
   const container = document.getElementById("activityCards");
   container.innerHTML = "";
-  rows.forEach((row) => {
+  rows.forEach((row, idx) => {
+    const estimated = toNumber(caloriesByActivity[idx]);
+    const activeTag = idx === activeIdx ? makeTag("当前选择", "tag-green") : "";
     const card = document.createElement("article");
     card.className = "record-card";
     card.innerHTML = `
       <div class="record-head">
         <h3>${createCell(row[0])}</h3>
-        <div class="record-tags">${makeTag(createCell(row[1]), "tag-blue")}</div>
+        <div class="record-tags">
+          ${makeTag(createCell(row[1]), "tag-blue")}
+          ${activeTag}
+        </div>
       </div>
       <div class="record-body">
+        <p><b>估算能量消耗：</b>${estimated === null ? "—" : `${estimated} kcal/日`}</p>
         <p><b>典型人群：</b>${createCell(row[2])}</p>
         <p><b>每日步数：</b>${createCell(row[3])}</p>
         <p><b>额外说明：</b>${createCell(row[4])}</p>
@@ -162,6 +168,22 @@ function calcMacroByTarget(targetKcal) {
   return { carb, protein, fat };
 }
 
+function getBmiRangeLabel(bmi) {
+  if (!Number.isFinite(bmi)) {
+    return "—";
+  }
+  if (bmi < 18.5) {
+    return "偏瘦";
+  }
+  if (bmi < 24) {
+    return "正常";
+  }
+  if (bmi < 28) {
+    return "超重";
+  }
+  return "肥胖";
+}
+
 async function initDailyNeedsPage() {
   renderSkeletonCards("activityCards", 4);
   renderSkeletonCards("macroCards", 4);
@@ -172,6 +194,7 @@ async function initDailyNeedsPage() {
 
   const genderInput = document.getElementById("gender");
   const weightInput = document.getElementById("weight");
+  const heightInput = document.getElementById("height");
   const activityInput = document.getElementById("activityLevel");
   const targetInput = document.getElementById("targetMode");
   const microKeywordInput = document.getElementById("microKeyword");
@@ -180,21 +203,27 @@ async function initDailyNeedsPage() {
   function refreshResult() {
     const gender = genderInput.value;
     const weight = Number(weightInput.value || 60);
+    const heightCm = Number(heightInput.value || 170);
     const activityIdx = activityMap[Number(activityInput.value)];
     const targetMode = targetInput.value;
     const baseList = gender === "male" ? sections.maleRows : sections.femaleRows;
     const picked = pickNearestWeightRow(baseList, weight);
-    const baseline = picked.calories[activityIdx];
+    const baseline = toNumber(picked.calories[activityIdx]) ?? 0;
     const adjust = targetMode === "cut" ? 0.9 : targetMode === "bulk" ? 1.1 : 1;
     const targetKcal = Math.round(baseline * adjust);
     const macro = calcMacroByTarget(targetKcal);
+    const bmiValue =
+      heightCm > 0 ? weight / ((heightCm / 100) * (heightCm / 100)) : Number.NaN;
+    const bmi = Number.isFinite(bmiValue) ? bmiValue.toFixed(1) : "—";
+    const bmiLabel = getBmiRangeLabel(bmiValue);
 
     document.getElementById("kpiWeight").textContent = `${picked.weight} kg（匹配）`;
-    document.getElementById("kpiBmi").textContent = createCell(picked.bmi);
+    document.getElementById("kpiBmi").textContent = `${bmi}（${bmiLabel}，档位参考：${createCell(picked.bmi)}）`;
     document.getElementById("kpiBase").textContent = `${baseline} kcal`;
     document.getElementById("kpiTarget").textContent = `${targetKcal} kcal`;
     document.getElementById("macroHint").textContent =
       `建议范围：碳水 ${macro.carb.low}-${macro.carb.high}g，蛋白 ${macro.protein.low}-${macro.protein.high}g，脂肪 ${macro.fat.low}-${macro.fat.high}g。`;
+    renderActivityCards(sections.activityRows, picked.calories, activityIdx);
   }
 
   renderActivityCards(sections.activityRows);
@@ -204,7 +233,7 @@ async function initDailyNeedsPage() {
     renderMicroCards(sections.microRows, microKeywordInput.value.trim().toLowerCase());
   }
 
-  [genderInput, weightInput, activityInput, targetInput].forEach((el) => {
+  [genderInput, weightInput, heightInput, activityInput, targetInput].forEach((el) => {
     el.addEventListener("input", refreshResult);
     el.addEventListener("change", refreshResult);
   });

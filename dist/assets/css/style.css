@@ -994,6 +994,58 @@ body:not(.page-guide) .tag-red {
   color: #334d78;
 }
 
+.calc-actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.calc-actions button {
+  min-width: 110px;
+}
+
+.calc-entry-list {
+  display: grid;
+  gap: 10px;
+}
+
+.calc-entry-card {
+  display: grid;
+  gap: 8px;
+}
+
+.calc-entry-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.calc-entry-top h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #213d72;
+}
+
+.calc-entry-empty {
+  margin: 0;
+  color: #667aa5;
+  font-size: 13px;
+}
+
+.calc-entry-total {
+  margin-top: 8px;
+  color: #46609d;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.calc-meal-kpis {
+  margin-top: 10px;
+}
+
 body.density-compact .record-list {
   gap: 8px;
 }
